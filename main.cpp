@@ -11,6 +11,10 @@ class Movie
 {
 private:
     string movie;
+    Node* reviews;
+public:
+    void setMovie(string m) {movie = m;}
+    void setReview(Node* head) {reivews = head;}
 };
 
 struct Node
@@ -27,12 +31,23 @@ void output(Node*);
 
 int main()
 {
+    vector<Movie> movies;
+
     ifstream inputFile("reviews.txt");
 
     if(!inputFile.is_open())
     {
         cout << "Error! Can't open File!";
         return 0;
+    }
+
+    string rev;
+    int count = 1;
+
+    while (getline(inputFile, review))
+    {
+        Movie temp;
+
     }
 
 }
