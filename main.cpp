@@ -29,7 +29,7 @@ public:
 Node* addNodeHead(Node *, double, string);
 Node* addNodeTail(Node *, double, string);
 Node* addReview(Node*, int);
-void output(Node*);
+void output(Node*, string);
 
 int main()
 {
@@ -44,29 +44,32 @@ int main()
     }
 
     string rev;
-    int count = 1;
     int movieCount = 1;
     Movie temp;
     Node* head = nullptr;
-
 
     while (getline(inputFile, rev))
     {
         if(movieCount > 3)
         {
            movies.push_back(temp);
-           Node* head = nullptr;
+           head = nullptr;
+           movieCount = 1;
         }
-        double rating = rand() % 5;
+        double rating = ((double) rand()) / RAND_MAX;
+        rating = 4 * rating + 1;
+        rating = (int)(rating / 0.1) * 0.1;
+
         head = addNodeHead(head, rating, rev);
         temp.setReviews(head);
-        string title = "Movie #" + count++;
+        string title = "Movie x";
         temp.setMovie(title);
         movieCount++;
     }
+    movies.push_back(temp);
 
     for(auto movie : movies)
-        output(movie.getReviews());
+        output(movie.getReviews(), movie.getMovie());
 
 }
 
@@ -147,9 +150,9 @@ Node* addReview(Node *head, int entry)
 // outputs all the reviews and comments per rating in the linked list and prints average of all reviews
 // arguments: a node object representing the head
 // returns: none
-void output(Node* head)
+void output(Node* head, string title)
 {
-    cout << "Outputting All Reviews: " << endl;
+    cout << "Reviews for " << title << endl;
 
     if (!head) {
         cout << "No reviews in list" << endl;
