@@ -20,9 +20,21 @@ private:
     string movie;
     Node* reviews;
 public:
+    // sets the title for the movie
+    // arguments: string representing the movie title
+    // returns: none
     void setMovie(string m) {movie = m;}
+    // sets the the head of the review linked list
+    // arguments: Node object that represents the head of the review linked list
+    // returns: none
     void setReviews(Node* head) {reviews = head;}
+    // returns the title of the movie
+    // arguments: none
+    // returns: returns the title of the movie
     string getMovie() {return movie;}
+    // returns the head node of the review linked list
+    // arguments: none
+    // returns: the head node of the review linked list
     Node* getReviews() {return reviews;}
 };
 
@@ -35,8 +47,10 @@ int main()
 {
     vector<Movie> movies;
 
+    // opens the file
     ifstream inputFile("reviews.txt");
 
+    //checks if file is open
     if(!inputFile.is_open())
     {
         cout << "Error! Can't open File!";
@@ -48,26 +62,37 @@ int main()
     Movie temp;
     Node* head = nullptr;
 
+    // reads from file line by line and puts it into string review
     while (getline(inputFile, rev))
     {
+        // if three reviews are inputed into the head node then push back the movie class into the vector of movies and derefrence head node object
         if(movieCount > 3)
         {
            movies.push_back(temp);
            head = nullptr;
            movieCount = 1;
         }
+
+        // generates a random double between 1.0 and 5.0 which represents rating
         double rating = ((double) rand()) / RAND_MAX;
         rating = 4 * rating + 1;
         rating = (int)(rating / 0.1) * 0.1;
 
+        // adds node to head linked list
         head = addNodeHead(head, rating, rev);
         temp.setReviews(head);
+
+        // creates title for movie and sets title for movie of movie object
         string title = "Movie x";
         temp.setMovie(title);
+
         movieCount++;
     }
+
+    //pushes back the last movie object into vector array of movie objects
     movies.push_back(temp);
 
+    //outputs all movies
     for(auto movie : movies)
         output(movie.getReviews(), movie.getMovie());
 
@@ -148,7 +173,7 @@ Node* addReview(Node *head, int entry)
 }
 
 // outputs all the reviews and comments per rating in the linked list and prints average of all reviews
-// arguments: a node object representing the head
+// arguments: a node object representing the head, a string representing title of movie
 // returns: none
 void output(Node* head, string title)
 {

@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1728098178 source:c:\users\guine\onedrive\documents\codeblocks\210-lab-19\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<iomanip>
+	<vector>
+
