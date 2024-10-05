@@ -1,11 +1,18 @@
 // COMSC-210 | Lab 18 | Daniil Malakhov
 // IDE used: Codeblocks
 #include <iostream>
-#include <fstream
+#include <fstream>
 #include <string>
 #include <iomanip>
 #include <vector>
 using namespace std;
+
+struct Node
+{
+    double rating;
+    string comments;
+    Node *next;
+};
 
 class Movie
 {
@@ -14,14 +21,9 @@ private:
     Node* reviews;
 public:
     void setMovie(string m) {movie = m;}
-    void setReview(Node* head) {reivews = head;}
-};
-
-struct Node
-{
-    double rating;
-    string comments;
-    Node *next;
+    void setReviews(Node* head) {reviews = head;}
+    string getMovie() {return movie;}
+    Node* getReviews() {return reviews;}
 };
 
 Node* addNodeHead(Node *, double, string);
@@ -44,11 +46,19 @@ int main()
     string rev;
     int count = 1;
 
-    while (getline(inputFile, review))
+    while (getline(inputFile, rev))
     {
         Movie temp;
-
+        Node* head = nullptr;
+        double rating = rand() % 10;
+        head = addNodeHead(head, rating, rev);
+        temp.setReviews(head);
+        string title = "Movie #" + count++;
+        temp.setMovie(title);
     }
+
+    for(auto movie : movies)
+        output(movie.getReviews());
 
 }
 
