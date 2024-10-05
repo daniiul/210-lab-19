@@ -45,16 +45,24 @@ int main()
 
     string rev;
     int count = 1;
+    int movieCount = 1;
+    Movie temp;
+    Node* head = nullptr;
+
 
     while (getline(inputFile, rev))
     {
-        Movie temp;
-        Node* head = nullptr;
-        double rating = rand() % 10;
+        if(movieCount > 3)
+        {
+           movies.push_back(temp);
+           Node* head = nullptr;
+        }
+        double rating = rand() % 5;
         head = addNodeHead(head, rating, rev);
         temp.setReviews(head);
         string title = "Movie #" + count++;
         temp.setMovie(title);
+        movieCount++;
     }
 
     for(auto movie : movies)
